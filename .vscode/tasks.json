@@ -1,0 +1,39 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "install dependencies",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["-m", "pip", "install", "-r", "requirements.txt"],
+            "group": "build"
+        },
+        {
+            "label": "deploy",
+            "type": "shell",
+            "command": "git",
+            "args": ["push", "heroku", "main"],
+            "group": "none"
+        },
+        {
+            "label": "open website",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["-m", "webbrowser", "http://rosty.me"],
+            "group": "none"
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["-m", "app"],
+            "options": {
+                "env": {
+                    "RELOAD": "true"
+                }
+            },
+            "isBackground": true,
+            "group": "none"
+        },
+    ]
+}
