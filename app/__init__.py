@@ -22,7 +22,7 @@ def index(request: Request, theme: Optional[Literal["light", "dark"]] = Query(No
     if theme is None:
         return template_response("index.jinja", {"request": request})
     else:
-        response = RedirectResponse("/")
+        response = RedirectResponse(request.headers.get("referer", "/"))
         response.set_cookie("theme", theme)
         return response
 
