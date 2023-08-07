@@ -1,0 +1,28 @@
+{%set theme = request.cookies.theme %}
+
+{% include "styles/solarized.css" %}
+
+{% macro light_theme() -%}
+body {
+  background-color: var(--solarized-base3);
+  color: var(--solarized-base01);
+}
+{%- endmacro %}
+
+{% macro dark_theme() -%}
+body {
+  background-color: var(--solarized-base03);
+  color: var(--solarized-base1);
+}
+{%- endmacro %}
+
+{% if theme is undefined %}
+  {{ dark_theme() }}
+  @media (prefers-color-scheme: light) {
+    {{ light_theme() }}
+  }
+{% elif theme == "light" %}
+  {{ light_theme() }}
+{% elif theme == "dark" %}
+  {{ dark_theme() }}
+{% endif %}

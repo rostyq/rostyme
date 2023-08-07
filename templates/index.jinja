@@ -1,24 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="icon" href="/static/favicon.ico">
-  <link rel="stylesheet" href="/static/styles.css">
-
-  <title>Rosty's Website</title>
-</head>
-
-<body>
-  <h1>Hello, World!</h1>
-
-  <main>
-    <p>
-      This is my website. It's a work in progress.
-    </p>
-  </main>
-</body>
-
-</html>
+{% extends "base.jinja" %}
+{% block title %}Rosty's Website{% endblock title %}
+{% block body %}
+<main>
+  <h1>Hi, I'm Rosty!</h1>
+  <p>This is my website. It's a work in progress.</p>
+</main>
+{% endblock body %}

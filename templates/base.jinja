@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+{%set theme = request.cookies.theme %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block meta %}{% endblock %}
+  <link rel="icon" href="/static/favicon.ico">
+  <title>{% block title %}{% endblock %}</title>
+  <style>{% include "styles/base.css.jinja" %}</style>
+  {% block head %}{% endblock %}
+</head>
+<body>
+{% block body %}{% endblock  %}
+</body>
+</html>
