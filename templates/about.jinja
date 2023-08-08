@@ -1,8 +1,16 @@
 {% extends "layout.jinja" %}
 {% block title %}About - Rostyslav Bohomaz{% endblock title %}
 {% block meta %}
-  <meta name="author" content="Rostyslav Bohomaz">
-  <meta name="description" content="About Rostyslav Bohomaz">
+  <meta name="author" content="{{ display_name }}">
+  <meta name="description" content="About {{ display_name }}">
+
+  <meta name="author" content="{{ display_name }}">
+  <meta name="description" content="About {{ display_name }}">
+
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="Developer from Ukraine. Open to find contact info.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.rosty.me/about">
 {% endblock meta %}
 {% block main %}
 <article>
