@@ -1,0 +1,107 @@
+{% extends "base.html.jinja" %}
+{% block title %}{% endblock title %}
+{% block meta %}{% endblock meta %}
+{% block head %}
+<style>
+  h1 {
+    text-align: center;
+  }
+
+  main {
+    margin: 0 auto;
+    width: 80%;
+    max-width: 800px;
+    padding: 10px;
+    font-size: 1.0em;
+    line-height: 1.5em;
+  }
+
+  .nav-center {
+    float: none;
+    position: absolute;
+    white-space: nowrap;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @media (max-width: 370px) {
+    .nav-center {
+      display: none;
+    }
+  }
+
+  .nav-right {
+    float: right;
+  }
+
+  nav {
+    margin: 1.2em;
+    overflow: hidden;
+    position: relative;
+  }
+
+  header nav a {
+    float: left;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  footer nav {
+    text-align: center;
+  }
+
+  footer nav a {
+    padding: 0.5em;
+  }
+
+  main nav a {
+    padding: 1em;
+  }
+
+  .dark-theme svg:hover {
+    color: var(--solarized-violet);
+  }
+
+  .light-theme svg:hover {
+    color: var(--solarized-yellow);
+  }
+
+  .donate-ukraine {
+    color: var(--solarized-yellow);
+  }
+
+  .donate-ukraine:hover {
+    color: var(--solarized-blue);
+  }
+</style>
+{% endblock head %}
+{% block body %}
+<header>
+  <nav>
+    {% if request.url.path != "/" %}
+      <a href="/">{% include "icons/house.svg" %}</a>
+    {% endif %}
+    <div class="nav-center">
+      <a class="donate-ukraine" href="https://savelife.in.ua/en" title="donate to Come Back Alive" target="_blank">🇺🇦 SAVE LIVES IN UKRAINE!</a>
+    </div>
+    <div class="nav-right">
+      <a class="dark-theme" href="/?theme=light" title="switch to light theme">{% include "icons/moon.svg" %}</a>
+      <a class="light-theme" href="/?theme=dark" title="switch to dark theme">{% include "icons/sun.svg" %}</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  {% block main %}{% endblock main %}
+</main>
+
+<footer>
+  <nav>
+    <a href="https://github.com/rostyq" title="GitHub Profile" target="_blank">{% include "icons/github.svg" %}</a>
+    <a href="mailto:rostyslav.bohomaz@gmail.com" title="Email" target="_blank">{% include "icons/envelope-fill.svg" %}</a>
+    <a href="https://linkedin.com/in/rostyq" title="LinkedIn Profile" target="_blank">{% include "icons/linkedin.svg" %}</a>
+    <a href="https://instagram.com/rostyque" title="Instagram Profile" target="_blank">{% include "icons/instagram.svg" %}</a>
+  </nav>
+</footer>
+{% endblock body %}

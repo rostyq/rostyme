@@ -2,22 +2,96 @@
 
 {% include "styles/solarized.css" %}
 
+@font-face {
+  font-family: "Martian Mono", "Courier New", Courier, monospace;
+  src: url('static/MartianMono.ttf');
+}
+
+html {
+  font-family: "Martian Mono", "Courier New", Courier, monospace;
+}
+
+body {
+  margin: 0;
+  font-weight: light;
+}
+
+article {
+  text-align: justify;
+}
+
+h1 {
+  font-size: 1.6em;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.4em;
+  font-weight: normal;
+}
+
+h3 {
+  font-size: 1.2em;
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+  color: var(--solarized-blue);
+}
+
+a:hover {
+  color: var(--solarized-cyan);
+}
+
 {% macro light_theme() -%}
+.dark-theme {
+  display: none;
+}
+
+h2, h3 {
+  color: var(--solarized-base1);
+}
+
 body {
   background-color: var(--solarized-base3);
   color: var(--solarized-base01);
 }
+svg {
+  color: var(--solarized-base01);
+}
+
+a svg:hover {
+  color: var(--solarized-base1);
+}
 {%- endmacro %}
 
 {% macro dark_theme() -%}
+.light-theme {
+  display: none;
+}
+
+h2, h3 {
+  color: var(--solarized-base01);
+}
+
 body {
   background-color: var(--solarized-base03);
   color: var(--solarized-base1);
+}
+
+svg {
+  color: var(--solarized-base1);
+}
+
+a svg:hover {
+  color: var(--solarized-base01);
 }
 {%- endmacro %}
 
 {% if theme is undefined %}
   {{ dark_theme() }}
+
   @media (prefers-color-scheme: light) {
     {{ light_theme() }}
   }
