@@ -7,14 +7,36 @@ from fastapi.requests import Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from .settings import settings
 
 __all__ = ["app"]
 
 
-app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
+app = FastAPI(debug=settings.debug, docs_url=None, redoc_url=None, openapi_url=None)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-template_response = Jinja2Templates(directory="templates", trim_blocks=True, lstrip_blocks=True).TemplateResponse
+
+def base_context(request: Request):
+    return {"base_url": str(settings.base_url)}
+
+
+def name_context(request: Request):
+    first_name = "Rostyslav"
+    last_name = "Bohomaz"
+    return {
+        "short_name": "Rosty",
+        "first_name": first_name,
+        "last_name": last_name,
+        "display_name": f"{first_name} {last_name}",
+    }
+
+
+template_response = Jinja2Templates(
+    directory="templates",
+    context_processors=[base_context, name_context],
+    trim_blocks=True,
+    lstrip_blocks=True
+).TemplateResponse
 
 
 def get_years_old():
@@ -32,7 +54,10 @@ def index(
     theme: Optional[Literal["light", "dark"]] = Query(None),
 ):
     if theme is None:
-        return template_response("index.jinja", {"request": request, "years_old": years_old})
+        return template_response("index.jinja", {
+            "request": request,
+            "years_old": years_old,
+        })
     else:
         response = RedirectResponse(request.headers.get("referer", "/"))
         response.set_cookie("theme", theme)
