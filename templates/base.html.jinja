@@ -2,6 +2,16 @@
 <html lang="en">
 {%set theme = request.cookies.theme %}
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block meta %}{% endblock %}
+
+  <link rel="icon" href="/static/favicon.ico">
+
+  <title>{% block title %}{% endblock %}</title>
+
+  <style>{% include "styles/base.css.jinja" %}</style>
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LNNQL6L5RQ"></script>
   <script>
@@ -11,13 +21,6 @@
     gtag('config', 'G-LNNQL6L5RQ');
   </script>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% block meta %}{% endblock %}
-  <link rel="icon" href="/static/favicon.ico">
-
-  <title>{% block title %}{% endblock %}</title>
-  <style>{% include "styles/base.css.jinja" %}</style>
   {% block head %}{% endblock %}
 </head>
 <body>

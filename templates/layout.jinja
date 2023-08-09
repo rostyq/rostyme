@@ -7,13 +7,9 @@
     text-align: center;
   }
 
-  main {
-    margin: 0 auto;
-    width: 80%;
-    max-width: 800px;
-    padding: 10px;
-    font-size: 1.0em;
-    line-height: 1.5em;
+  img {
+    max-width: -moz-available;
+    max-width: -webkit-fill-available;
   }
 
   .nav-center {
@@ -102,6 +98,7 @@
     <a href="mailto:rostyslav.bohomaz@gmail.com" title="Email" target="_blank">{% include "icons/envelope-fill.svg" %}</a>
     <a href="https://linkedin.com/in/rostyq" title="LinkedIn Profile" target="_blank">{% include "icons/linkedin.svg" %}</a>
     <a href="https://instagram.com/rostyque" title="Instagram Profile" target="_blank">{% include "icons/instagram.svg" %}</a>
+    <a href="/pot?kind=coffee" title="Make coffee">{% include "icons/cup-hot-fill.svg" %}</a>
   </nav>
 </footer>
 {% endblock body %}

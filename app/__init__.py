@@ -4,8 +4,12 @@ from fastapi import FastAPI, Depends
 from fastapi.params import Query
 from fastapi.responses import RedirectResponse
 from fastapi.requests import Request
+from fastapi.exceptions import HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+
+from starlette.status import HTTP_418_IM_A_TEAPOT
+from http.client import responses
 
 from .settings import settings
 
@@ -14,6 +18,17 @@ __all__ = ["app"]
 
 app = FastAPI(debug=settings.debug, docs_url=None, redoc_url=None, openapi_url=None)
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+@app.exception_handler(HTTPException)
+def http_exception_handler(request: Request, exc: HTTPException):
+    context = {
+        "request": request,
+        "status_code": exc.status_code,
+        "status_message": responses[exc.status_code],
+        "detail": exc.detail
+    }
+    return template_response("error.jinja", context=context, status_code=exc.status_code)
 
 
 def base_context(request: Request):
@@ -67,3 +82,11 @@ def index(
 @app.get("/about")
 def about(request: Request):
     return template_response("about.jinja", {"request": request})
+
+
+@app.get("/pot")
+def pot(request: Request, kind: Literal["coffee", "tea"] = Query("coffee", alias="type")):
+    if kind == "coffee":
+        raise HTTPException(status_code=HTTP_418_IM_A_TEAPOT, detail="Cannot brew coffee in a teapot.")
+    else:
+        return template_response("pot.jinja", {"request": request, "kind": kind})
