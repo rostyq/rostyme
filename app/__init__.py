@@ -2,7 +2,7 @@ from typing import Literal, Optional, Annotated
 
 from fastapi import FastAPI, Depends
 from fastapi.params import Query
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, PlainTextResponse
 from fastapi.requests import Request
 from fastapi.exceptions import HTTPException
 from fastapi.staticfiles import StaticFiles
@@ -22,13 +22,18 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.exception_handler(HTTPException)
 def http_exception_handler(request: Request, exc: HTTPException):
-    context = {
-        "request": request,
-        "status_code": exc.status_code,
-        "status_message": responses[exc.status_code],
-        "detail": exc.detail
-    }
-    return template_response("error.jinja", context=context, status_code=exc.status_code)
+    accept = request.headers.get("accept", "*/*")
+
+    if "text/html" in accept:
+        context = {
+            "request": request,
+            "status_code": exc.status_code,
+            "status_message": responses[exc.status_code],
+            "detail": exc.detail
+        }
+        return template_response("error.jinja", context=context, status_code=exc.status_code)
+    else:
+        return PlainTextResponse(status_code=exc.status_code, content=exc.detail)
 
 
 def base_context(request: Request):
