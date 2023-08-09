@@ -1,18 +1,9 @@
 {% set title = "%s - Personal Website" % display_name %}
-{% set meta_image_url = url_for("static", path="preview.png") %}
-{% set meta_image_alt = "Rounded avatar with Ukrainian flag on the background" %}
+{% set description = "a %s y.o. developer from Ukraine. Open to find contact info." % years_old %}
 
 {% extends "layout.jinja" %}
 {% block title %}{{ title }}{% endblock title %}
 {% block meta %}
-  <meta name="author" content="{{ display_name }}">
-  <meta name="description" content="Developer from Ukraine. Crafting digital wonders with code.">
-
-  <meta property="og:title" content="{{ title }}">
-  <meta property="og:description" content="Developer from Ukraine. Open to find contact info.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ url_for('index') }}">
-
   {% include "meta.jinja" %}
 {% endblock meta %}
 {% block main %}

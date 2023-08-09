@@ -1,16 +1,11 @@
+{% set title = "About - %s" % display_name %}
+{% set url = url_for("about") %}
+{% set description = "Full-time developer from Ukraine. Crafting digital wonders with code." %}
+
 {% extends "layout.jinja" %}
-{% block title %}About - Rostyslav Bohomaz{% endblock title %}
+{% block title %}{{ title }}{% endblock title %}
 {% block meta %}
-  <meta name="author" content="{{ display_name }}">
-  <meta name="description" content="About {{ display_name }}">
-
-  <meta name="author" content="{{ display_name }}">
-  <meta name="description" content="About {{ display_name }}">
-
-  <meta property="og:title" content="{{ title }}">
-  <meta property="og:description" content="Developer from Ukraine. Open to find contact info.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ url_for('about') }}">
+  {% include "meta.jinja" %}
 {% endblock meta %}
 {% block main %}
 <article>
