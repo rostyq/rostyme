@@ -11,6 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 
 from starlette.status import HTTP_418_IM_A_TEAPOT
 
@@ -25,6 +26,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 if settings.production:
     app.add_middleware(HTTPSRedirectMiddleware)
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.allowed_hosts)
+    app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 
 @app.exception_handler(HTTPException)
