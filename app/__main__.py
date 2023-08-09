@@ -2,7 +2,7 @@ from uvicorn import run
 from .settings import settings
 
 
-if settings.reload and not settings.debug:
+if settings.reload or settings.workers > 1 and not settings.debug:
     app = "app:app"
 else:
     from app import app
