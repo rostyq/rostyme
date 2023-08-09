@@ -25,7 +25,7 @@
             "label": "open website",
             "type": "shell",
             "command": "${command:python.interpreterPath}",
-            "args": ["-m", "webbrowser", "http://rosty.me"],
+            "args": ["-m", "webbrowser", "https://www.rosty.me"],
             "group": "none"
         },
         {
