@@ -1,5 +1,5 @@
 {% set title = "%s - Personal Website" % display_name %}
-{% set meta_image_url = "%s/static/preview.png" % url_for("index") %}
+{% set meta_image_url = url_for("static", path="preview.png") %}
 {% set meta_image_alt = "Rounded avatar with Ukrainian flag on the background" %}
 
 {% extends "layout.jinja" %}
