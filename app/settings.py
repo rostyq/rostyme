@@ -27,4 +27,8 @@ class Settings(BaseSettings):
     debug: bool = False
     workers: int = 1
 
+    production: bool = False
+
+    allowed_hosts: list[str] = ["*"]
+
 settings = Settings()

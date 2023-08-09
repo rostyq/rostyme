@@ -1,5 +1,7 @@
 from typing import Literal, Optional, Annotated
 
+from http.client import responses
+
 from fastapi import FastAPI, Depends
 from fastapi.params import Query
 from fastapi.responses import RedirectResponse, PlainTextResponse
@@ -7,9 +9,10 @@ from fastapi.requests import Request
 from fastapi.exceptions import HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 
 from starlette.status import HTTP_418_IM_A_TEAPOT
-from http.client import responses
 
 from .settings import settings
 
@@ -18,6 +21,10 @@ __all__ = ["app"]
 
 app = FastAPI(debug=settings.debug, docs_url=None, redoc_url=None, openapi_url=None)
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+if settings.production:
+    app.add_middleware(HTTPSRedirectMiddleware)
+    app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.allowed_hosts)
 
 
 @app.exception_handler(HTTPException)
