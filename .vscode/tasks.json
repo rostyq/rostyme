@@ -2,6 +2,12 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "create venv",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["-m", "venv", "venv"]
+        },
+        {
             "label": "install dependencies",
             "type": "shell",
             "command": "${command:python.interpreterPath}",
