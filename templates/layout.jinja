@@ -82,8 +82,8 @@
       <a class="donate-ukraine" href="https://savelife.in.ua/en" title="donate to Come Back Alive" target="_blank">🇺🇦 SAVE LIVES IN UKRAINE!</a>
     </div>
     <div class="nav-right">
-      <a class="dark-theme" href="/?theme=light" title="switch to light theme">{% include "icons/moon.svg" %}</a>
-      <a class="light-theme" href="/?theme=dark" title="switch to dark theme">{% include "icons/sun.svg" %}</a>
+      <a class="dark-theme" href="{{ url_for('index') }}?theme=light" title="switch to light theme">{% include "icons/moon.svg" %}</a>
+      <a class="light-theme" href="{{ url_for('index') }}?theme=dark" title="switch to dark theme">{% include "icons/sun.svg" %}</a>
     </div>
   </nav>
 </header>
@@ -98,7 +98,7 @@
     <a href="mailto:rostyslav.bohomaz@gmail.com" title="Email" target="_blank">{% include "icons/envelope-fill.svg" %}</a>
     <a href="https://linkedin.com/in/rostyq" title="LinkedIn Profile" target="_blank">{% include "icons/linkedin.svg" %}</a>
     <a href="https://instagram.com/rostyque" title="Instagram Profile" target="_blank">{% include "icons/instagram.svg" %}</a>
-    <a href="/pot?kind=coffee" title="Make coffee">{% include "icons/cup-hot-fill.svg" %}</a>
+    <a href="{{ url_for('pot') }}?type=coffee" title="Make coffee">{% include "icons/cup-hot-fill.svg" %}</a>
   </nav>
 </footer>
 {% endblock body %}

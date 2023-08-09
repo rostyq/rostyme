@@ -6,21 +6,22 @@
 {% block title %}{{ title }}{% endblock title %}
 {% block meta %}
   <meta name="author" content="{{ display_name }}">
-  <meta name="description" content="{{ display_name }}. Developer from Ukraine. Crafting digital wonders with code.">
+  <meta name="description" content="Developer from Ukraine. Crafting digital wonders with code.">
 
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="Developer from Ukraine. Open to find contact info.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ base_url }}">
+  <meta property="og:url" content="{{ url_for('index') }}">
 
   {% include "meta.jinja" %}
 {% endblock meta %}
 {% block main %}
 <main>
+
   <h1>Hi, I'm {{ short_name }}</h1>
   <p style="text-align: center">a {{ years_old }} y.o. full-time developer from Ukraine<br>crafting digital wonders with code</p>
   <nav style="text-align: center">
-    <a href="/about" title="About Me">About</a>
+    <a href="{{ url_for('about') }}" title="About Me">About</a>
     <a href="https://kekity-kek.tumblr.com" style="color: var(--solarized-magenta)" title="Tumblr Blog" target="_blank">Memes</a>
   </nav>
 </main>

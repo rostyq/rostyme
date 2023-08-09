@@ -5,7 +5,7 @@
   <h1>{{ status_code }} {{ status_message }}</h1>
   <p>{{ detail }}</p>
   {% if status_code == 418 %}
-    <p><a href="/pot?type=tea">Make tea</a></p>
+    <p><a href="{{ url_for('pot') }}?type=tea">Make tea</a></p>
   {% endif %}
   <p><a href="/">Return to the homepage</a></p>
 </main>
